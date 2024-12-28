@@ -31,7 +31,14 @@ HashSet, TreeSet, понять применения Comparable, Comparator.*/
 
 package com.aston.javabase.homework_2;
 /**MyArrayList - динамический массив **/
+
 //TODO дописать описание класса
+//TODO sort(Comparator<T> comparator)
+//TODO clear()
+//TODO quicksort(Comparator<T> comparator)
+//TODO test
+//TODO MyArrayListInterface
+
 public class MyArrayList<T> {
     private final int INIT_SIZE = 16;
     private final int CUT_RATE = 4;
