@@ -30,7 +30,13 @@
 HashSet, TreeSet, понять применения Comparable, Comparator.*/
 
 package com.aston.javabase.homework_2;
-/**MyArrayList - динамический массив **/
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+/**
+ * MyArrayList - динамический массив
+ **/
 
 //TODO дописать описание класса
 //TODO sort(Comparator<T> comparator)
@@ -46,50 +52,79 @@ public class MyArrayList<T> {
     private int pointer = 0;
 
     /**
-    Добавляет новый элемент в список. При достижении размера внутреннего
-    массива происходит его увеличение в два раза.
-    **/
+     * Добавляет новый элемент в список. При достижении размера внутреннего
+     * массива происходит его увеличение в два раза.
+     **/
 
     public void add(T item) {
-        if(pointer == array.length-1)
-            resize(array.length*2);
+        if (pointer == array.length - 1)
+            resize(array.length * 2);
         array[pointer++] = item;
     }
 
     /**
-    Возвращает элемент списка по индексу.
-    **/
+     * Возвращает элемент списка по индексу.
+     **/
 
     public T get(int index) {
         return (T) array[index];
     }
 
     /**
-    Удаляет элемент списка по индексу. Все элементы справа от удаляемого
-    перемещаются на шаг налево. Если после удаления элемента количество
-    элементов стало в CUT_RATE раз меньше чем размер внутреннего массива,
-    то внутренний массив уменьшается в два раза, для экономии занимаемого
-    места.
-    **/
+     * Удаляет элемент списка по индексу. Все элементы справа от удаляемого
+     * перемещаются на шаг налево. Если после удаления элемента количество
+     * элементов стало в CUT_RATE раз меньше чем размер внутреннего массива,
+     * то внутренний массив уменьшается в два раза, для экономии занимаемого
+     * места.
+     **/
 
     public void remove(int index) {
-        for (int i = index; i<pointer; i++)
-            array[i] = array[i+1];
+        for (int i = index; i < pointer; i++)
+            array[i] = array[i + 1];
         array[pointer] = null;
         pointer--;
         if (array.length > INIT_SIZE && pointer < array.length / CUT_RATE)
-            resize(array.length/2);
+            resize(array.length / 2);
     }
 
-    /**Возвращает количество элементов в списке**/
+    /**
+     * Возвращает количество элементов в списке
+     **/
     public int size() {
         return pointer;
     }
 
-    /**Вспомогательный метод для масштабирования.**/
+    /**
+     * Вспомогательный метод для масштабирования.
+     **/
     private void resize(int newLength) {
         Object[] newArray = new Object[newLength];
         System.arraycopy(array, 0, newArray, 0, pointer);
         array = newArray;
+    }
+
+    public void clear() {
+        for (int to = pointer, i = pointer = 0; i < to; i++)
+            array[i] = null;
+    }
+
+    public void sort(Comparator<? super T> c) {
+        Arrays.sort(array, 0,pointer,(Comparator) c);
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(Arrays.copyOf(array, pointer));
+    }
+
+    public static void main(String[] args) {
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        myArrayList.add(1);
+        myArrayList.add(3);
+        myArrayList.add(2);
+        System.out.println(myArrayList);
+        myArrayList.sort(Integer::compareTo);
+        System.out.println(myArrayList);
+
     }
 }
