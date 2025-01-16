@@ -7,10 +7,13 @@ public class CollectionsMain {
     public static void main(String[] args) {
 
         Map<String, String> map = new HashMap<>();
-        map.put("John Smith", "value");
 
-        checkArrayList();
-//        checkLinkedList();
+        Map<Dog, String> map2 = new HashMap<>();
+        Dog dog = new Dog("Dog", 2);
+        map2.put(dog, "value");
+
+//        checkArrayList();
+        checkLinkedList();
     }
 
     private static void checkArrayList() {

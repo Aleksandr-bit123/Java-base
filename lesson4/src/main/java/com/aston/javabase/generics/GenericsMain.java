@@ -12,7 +12,6 @@ public class GenericsMain {
     public static void main(String[] args) {
 
         System.out.println(getListWithDifferentTypes());
-
     }
 
     /*
@@ -48,3 +47,10 @@ public class GenericsMain {
         return commonList;
     }
 }
+
+// если захочется дополнительно почитать о дженериках:
+// https://blog.skillfactory.ru/glossary/generics/
+
+// https://skillbox.ru/media/base/dzheneriki-v-java-dlya-samykh-malenkikh/
+
+// https://habr.com/ru/companies/sberbank/articles/416413/

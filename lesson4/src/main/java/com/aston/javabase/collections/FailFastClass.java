@@ -18,3 +18,5 @@ public class FailFastClass {
         } // ConcurrentModificationException
     }
 }
+// хорошая статья
+// https://www.baeldung.com/java-fail-safe-vs-fail-fast-iterator

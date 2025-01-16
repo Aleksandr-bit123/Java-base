@@ -3,6 +3,7 @@ package com.aston.javabase.generics;
 import com.aston.javabase.generics.animals.Animal;
 import com.aston.javabase.generics.animals.Cat;
 import com.aston.javabase.generics.animals.Dog;
+import com.aston.javabase.generics.example.MyInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,8 @@ public class WildcardsMain {
     }
 
     private static void fight(List<? extends Animal> animals1, List<? extends Animal> animals2)
-    {
 //    private static void fight(List<Animal> animals1, List<Animal> animals2)
+    {
 
         System.out.println("fight " + animals1 + " and " + animals2);
     }

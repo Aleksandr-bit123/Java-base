@@ -1,6 +1,4 @@
-package com.aston.javabase.collections;
-
-import java.util.Objects;
+package com.aston.javabase.comporator;
 
 public class Dog {
 
@@ -18,19 +16,6 @@ public class Dog {
 
     public int getAge() {
         return age;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dog dog = (Dog) o;
-        return age == dog.age && Objects.equals(name, dog.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, age);
     }
 
     @Override
