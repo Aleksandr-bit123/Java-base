@@ -31,16 +31,13 @@ HashSet, TreeSet, понять применения Comparable, Comparator.*/
 
 package com.aston.javabase.homework_2;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * MyArrayList - динамический массив
  **/
 
 //TODO дописать описание класса
-//TODO sort(Comparator<T> comparator)
-//TODO clear()
 //TODO quicksort(Comparator<T> comparator)
 //TODO test
 //TODO MyArrayListInterface
@@ -103,13 +100,70 @@ public class MyArrayList<T> {
         array = newArray;
     }
 
+    /**
+     * Очищает весь список. Восстанавливает длину массива до INIT_SIZE
+     **/
     public void clear() {
         for (int to = pointer, i = pointer = 0; i < to; i++)
             array[i] = null;
+        resize(INIT_SIZE);
     }
 
     public void sort(Comparator<? super T> c) {
-        Arrays.sort(array, 0,pointer,(Comparator) c);
+        try {
+            if (array != null && Arrays.stream(Arrays.copyOf(array, pointer)).noneMatch(Objects::isNull)) {
+                Arrays.sort((T[]) array, 0, pointer, c);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Что-то пошло не так=(", e);
+        }
+    }
+
+
+    public void quickSort(Comparator<? super T> c) {
+        try {
+            if (array != null && Arrays.stream(Arrays.copyOf(array, pointer)).noneMatch(Objects::isNull)) {
+                quickSortRecursive((T[]) array, 0, pointer - 1, c);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Что-то пошло не так=(", e);
+        }
+    }
+
+    private void quickSortRecursive(T[] arr, int low, int high, Comparator<? super T> c) {
+        if (low < high) {
+            int pi = partition(arr, low, high, c);
+
+            quickSortRecursive(arr, low, pi - 1, c);
+            quickSortRecursive(arr, pi + 1, high, c);
+        }
+    }
+
+    private int partition(T[] arr, int low, int high, Comparator<? super T> c) {
+
+        int middle = low + (high - low) / 2;
+        T pivot = arr[middle];
+
+
+        T temp = arr[middle];
+        arr[middle] = arr[high];
+        arr[high] = temp;
+
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (c.compare(arr[j], pivot) < 0) {
+                i++;
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
     }
 
     @Override
@@ -122,8 +176,14 @@ public class MyArrayList<T> {
         myArrayList.add(1);
         myArrayList.add(3);
         myArrayList.add(2);
+        myArrayList.add(6);
+        myArrayList.add(2);
+        myArrayList.add(2);
+        myArrayList.add(0);
         System.out.println(myArrayList);
-        myArrayList.sort(Integer::compareTo);
+        myArrayList = null;
+//        myArrayList.sort(Integer::compareTo);
+//        myArrayList.quickSort(Integer::compareTo);
         System.out.println(myArrayList);
 
     }
