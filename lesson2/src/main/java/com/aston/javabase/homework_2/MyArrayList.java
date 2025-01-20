@@ -67,6 +67,7 @@ public class MyArrayList<T> {
      **/
 
     public T get(int index) {
+        Objects.checkIndex(index, pointer);
         return (T) array[index];
     }
 
@@ -79,6 +80,7 @@ public class MyArrayList<T> {
      **/
 
     public void remove(int index) {
+        Objects.checkIndex(index, pointer);
         for (int i = index; i < pointer; i++)
             array[i] = array[i + 1];
         array[pointer] = null;
@@ -189,7 +191,7 @@ public class MyArrayList<T> {
         myArrayList.add(2);
         myArrayList.add(2);
         myArrayList.add(0);
-        System.out.println(myArrayList);
+//        System.out.println(myArrayList.get(12));
         myArrayList = null;
 //        myArrayList.sort(Integer::compareTo);
 //        myArrayList.quickSort(Integer::compareTo);
