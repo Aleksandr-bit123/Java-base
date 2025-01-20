@@ -34,13 +34,16 @@ package com.aston.javabase.homework_2;
 import java.util.*;
 
 /**
- * MyArrayList - динамический массив
+ * <p>MyArrayList - динамический массив, способный:
+ *
+ * <p>- добавить элемент: add(T element),
+ * <p>- добавить элемент по индексу: add(int index, T element),
+ * <p>- получить элемент: get(int index),
+ * <p>- удалить элемент remove(int index),
+ * <p>- очистить всю коллекцию: clear(),
+ * <p>- отсортировать коллекцию: sort(Comparator <<i>T></i> comparator),
+ * @author  Александр Максимов
  **/
-
-//TODO дописать описание класса
-//TODO quicksort(Comparator<T> comparator)
-//TODO test
-//TODO MyArrayListInterface
 
 public class MyArrayList<T> {
     private final int INIT_SIZE = 16;
@@ -91,9 +94,8 @@ public class MyArrayList<T> {
         return pointer;
     }
 
-    /**
-     * Вспомогательный метод для масштабирования.
-     **/
+
+    //     Вспомогательный метод для масштабирования.
     private void resize(int newLength) {
         Object[] newArray = new Object[newLength];
         System.arraycopy(array, 0, newArray, 0, pointer);
@@ -109,6 +111,9 @@ public class MyArrayList<T> {
         resize(INIT_SIZE);
     }
 
+    /**
+     * Сортирует массив. Использует Arrays.sort(). Не сортирует список включающий null-значения
+     **/
     public void sort(Comparator<? super T> c) {
         try {
             if (array != null && Arrays.stream(Arrays.copyOf(array, pointer)).noneMatch(Objects::isNull)) {
@@ -119,7 +124,9 @@ public class MyArrayList<T> {
         }
     }
 
-
+    /**
+     * Сортирует массив. Использует алгоритм быстрой сортировки. Не сортирует список включающий null-значения
+     **/
     public void quickSort(Comparator<? super T> c) {
         try {
             if (array != null && Arrays.stream(Arrays.copyOf(array, pointer)).noneMatch(Objects::isNull)) {
@@ -130,6 +137,7 @@ public class MyArrayList<T> {
         }
     }
 
+    //     Рекурсивный метод быстрой сортировки
     private void quickSortRecursive(T[] arr, int low, int high, Comparator<? super T> c) {
         if (low < high) {
             int pi = partition(arr, low, high, c);
@@ -139,6 +147,7 @@ public class MyArrayList<T> {
         }
     }
 
+    //     Вспомогательный метод для быстрой сортировки.
     private int partition(T[] arr, int low, int high, Comparator<? super T> c) {
 
         int middle = low + (high - low) / 2;
