@@ -16,10 +16,13 @@ public class ExceptionMain {
             int[] ints = {0, 1, 2, 3};
             // пытаемся обратиться к несуществующему индексу
             ints[5] = 5;
-
-        } catch (ArrayIndexOutOfBoundsException e) {
+//            System.exit(1);
+//            while (true) {
+//
+//            }
+        } catch (ArrayIndexOutOfBoundsException | CustomException e) {
             System.out.println("block catch");
-                throw new RuntimeException(e.getMessage());
+                throw new CustomException("block catch ArrayIndexOutOfBoundsException");
 //            System.out.println("log ArrayIndexOutOfBoundsException");
 
         } catch (Exception exception) {
