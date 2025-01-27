@@ -6,9 +6,9 @@ public class CreateThreadClass {
 
         Robot robot = new Robot();
         Thread childThread = new Thread(robot); // Главная нить создает дочернюю нить
-
+        childThread.setDaemon(true);
         childThread.start();// Затем запускает ее
-
+//        childThread.stop();
 
         try {
             childThread.join(); // И ждет ее завершения
