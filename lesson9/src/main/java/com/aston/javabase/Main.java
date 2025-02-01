@@ -9,6 +9,5 @@ public class Main {
 
         List<String> strings = new LinkedList<>();
         strings.contains("Name");
-
     }
 }
